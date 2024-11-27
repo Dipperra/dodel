@@ -9,9 +9,25 @@ public class PlatformJump : MonoBehaviour
     {
         var playerRigidBody2D = collision.rigidbody;
         Vector2 newVelocity = collision.relativeVelocity;
-        newVelocity.y = (_isTouched) ? (_velocityUp) : (-newVelocity.y);
-        _isTouched = true;
-        playerRigidBody2D.velocity = newVelocity;
+        //newVelocity.y = (_isTouched) ? (_velocityUp) : (-newVelocity.y);
+        //if (newVelocity.y < 0.15)
+        //{
+        //    newVelocity.y = _velocityUp;
+        //}
+        //Debug.Log(newVelocity);
+        //_isTouched = true;
+        //playerRigidBody2D.velocity = newVelocity;
+
+        bool isPlayerDown = transform.position.y >= playerRigidBody2D.gameObject.transform.position.y;
+        if (isPlayerDown)
+        {
+            playerRigidBody2D.velocity = newVelocity;
+        }
+        else
+        {
+            newVelocity.y = _velocityUp;
+            playerRigidBody2D.velocity = newVelocity;
+        }
     }
 
 }
